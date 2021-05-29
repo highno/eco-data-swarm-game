@@ -27,11 +27,22 @@ class TitleScene extends Phaser.Scene {
           var buttonNerd = this.add.text(300,350, 'Nerd');
 
           buttonCitizen.setInteractive({ useHandCursor: true });
+          buttonCitizen.on('pointerdown', () => this.clickButton('Citizen'));
           buttonScientist.setInteractive({ useHandCursor: true });
+          buttonScientist.on('pointerdown', () => this.clickButton('Scientist'));
           buttonJournalist.setInteractive({ useHandCursor: true });
+          buttonJournalist.on('pointerdown', () => this.clickButton('Journalist'));
           buttonPolitician.setInteractive({ useHandCursor: true });
+          buttonPolitician.on('pointerdown', () => this.clickButton('Politician'));
           buttonNerd.setInteractive({ useHandCursor: true });
+          buttonNerd.on('pointerdown', () => this.clickButton('Nerd'));
+          
 	}
+    clickButton(role) {
+        console.log(""+role);
+        //GameModel.setRole(role); TODO
+        this.scene.switch('gameScene');
+    }
 
 }
 

@@ -71,6 +71,10 @@ Data Scientist
 
 
 
+Quellen:
+https://devcenter.heroku.com/articles/getting-started-with-nodejs#prepare-the-app
+https://phaser.io/examples
+https://www.patchesoft.com/phaser-3-title-screen-tutorial
 
 
 
