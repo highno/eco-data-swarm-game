@@ -7,8 +7,8 @@ class GameScene extends Phaser.Scene {
     burnout = 1;
     burnoutRect;
     card0;
+    card1;
     card2;
-    card3;
     textPositions =
         [
             {x: 900, y: 150},   //Schleswig-Holstein
@@ -31,6 +31,7 @@ class GameScene extends Phaser.Scene {
     }
 
     init(data) {
+        console.log(data.role);
         for (let i = 0; i < this.aiFeelings.length; i++) {
             this.aiFeelings[i] = this.aiFeelingStartMin + Math.floor(Math.random() * (this.aiFeelingStartMax - this.aiFeelingStartMin));
         }
