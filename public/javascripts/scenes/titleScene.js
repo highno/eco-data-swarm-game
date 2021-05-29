@@ -3,7 +3,9 @@ class TitleScene extends Phaser.Scene {
 	constructor() {
 		super({key:'titleScene'});
 	}
-        
+    init(gameData) {
+        console.log(gameData.cards[1].shortDescription);
+    };
 	preload() {
 		this.load.image('background', './images/background.jpg');
 	}
@@ -43,7 +45,7 @@ class TitleScene extends Phaser.Scene {
         //this.settings.data = role;
         //GameModel.setRole(role); TODO
         
-        this.scene.start('gameScene',{role: role});
+        this.scene.start('gameScene',gameData);
     }
 
 }
