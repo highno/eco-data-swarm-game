@@ -1,14 +1,24 @@
 class GameScene extends Phaser.Scene {
 
+    //GameStats
     aiFeelingStartMin = 5;
     aiFeelingStartMax = 25;
-    aiFeelings = new Array(13);
-    texts = new Array(13);
     burnout = 1;
+    aiFeelings = new Array(13);
+
+
+    //UI
+    texts = new Array(13);
     burnoutRect;
-    card0;
-    card1;
-    card2;
+
+    //Cards
+    cards = new Array(3);
+    titelText = new Array(3);
+    descriptionText = new Array(3);
+    eddieText = new Array(3);
+    stressText = new Array(3);
+
+
     textPositions =
         [
             {x: 900, y: 150},   //Schleswig-Holstein
@@ -53,19 +63,7 @@ class GameScene extends Phaser.Scene {
 
         this.add.text(1220, 30, "Burnout:");
 
-        this.card0 = this.add.graphics();
-        this.card1 = this.add.graphics();
-        this.card2 = this.add.graphics();
-
-
-        this.card0.lineStyle(2, 0xffff00, 1);
-        this.card0.strokeRoundedRect(32, 32, 200, 300, 32);
-
-        this.card1.lineStyle(2, 0xffff00, 1);
-        this.card1.strokeRoundedRect(252, 32, 200, 300, 32);
-
-        this.card2.lineStyle(2, 0xffff00, 1);
-        this.card2.strokeRoundedRect(252, 352, 200, 300, 32);
+        this.CreateCard(0, 32, 32);
 
     }
 
@@ -91,8 +89,29 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    DrawCard() {
+    CreateCard(index, x, y) {
 
+        var style = {
+            fontSize: 14,
+            fontFamily: 'Arial',
+            align: "left",
+            wordWrap: {width: 150, useAdvancedWrap: true}
+        }
+
+        this.cards[index] = this.add.rectangle(x, y, 200, 300).setOrigin(0, 0);
+        this.cards[index].setInteractive();
+        this.cards[index].setStrokeStyle(4, 0xffffff);
+        this.cards[index].on('pointerdown', () => this.clickButton("asdasdasd"));
+
+        this.titelText[index] = this.add.text(x + 25, y + 5, "Titel", style);
+        this.descriptionText[index] = this.add.text(x + 25, this.titelText[index].height + this.titelText[index].y + 5, "Descriptionasdasdasdasdasdassdasddasdasdasdasdasdasdas", style);
+        this.eddieText[index] = this.add.text(x + 25, this.descriptionText[index].height + this.descriptionText[index].y + 5, "Description2",style);
+
+    }
+
+    ActivateCard(stats) {
+        this.burnout += -stats.stress;
+        this.aiFeelings[Math.floor(Math.random() * this.aiFeelings.length)] += -stats.eddie;
     }
 
 }
