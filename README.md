@@ -2,7 +2,7 @@
 
 Steps.
 
-1) Make Load Scene mit Auswahl von 5 Persona's durch Taste Keyboard 1-5 kommt man ins Spiel
+1) Make Load Scene mit Auswahl von 5 Persona's durch Taste Keyboard 1-5(bevorzugt doch Mausclick) kommt man ins Spiel
 
 2) Game Scene Start.
  - 5 von 10 Skill/aktionskarten erscheinen unten am Bildschirm
@@ -71,6 +71,10 @@ Data Scientist
 
 
 
+Quellen:
+https://devcenter.heroku.com/articles/getting-started-with-nodejs#prepare-the-app
+https://phaser.io/examples
+https://www.patchesoft.com/phaser-3-title-screen-tutorial
 
 
 
