@@ -10,13 +10,17 @@ var titleScene = new TitleScene();
 var config = {
   type: Phaser.AUTO,
   width: 800,
-  height: 600,
+  height: 600
 };
 var game = new Phaser.Game(config);
 
+var gamedata = {
+  role: ''
+};
 // load scenes
-game.scene.add('titleScene', titleScene);
-game.scene.add("game", gameScene);
+game.scene.add('titleScene', titleScene, false, gamedata);
+game.scene.add("game", gameScene, false, gamedata);
 
 // start title
 game.scene.start('titleScene');
+

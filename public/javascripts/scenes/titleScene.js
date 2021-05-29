@@ -40,7 +40,9 @@ class TitleScene extends Phaser.Scene {
 	}
     clickButton(role) {
         console.log(""+role);
+        this.settings.data = role;
         //GameModel.setRole(role); TODO
+        
         this.scene.switch('gameScene');
     }
 
