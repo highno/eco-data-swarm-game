@@ -9,8 +9,9 @@ var titleScene = new TitleScene();
 //* Game scene */
 var config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: 1900,
+  height: 900,
+  backgroundColor: '0x000000',
 };
 var game = new Phaser.Game(config);
 
@@ -19,4 +20,4 @@ game.scene.add('titleScene', titleScene);
 game.scene.add("game", gameScene);
 
 // start title
-game.scene.start('titleScene');
+game.scene.start('gameScene');
