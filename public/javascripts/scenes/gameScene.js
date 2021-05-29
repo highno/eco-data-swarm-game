@@ -25,7 +25,8 @@ class GameScene extends Phaser.Scene {
         super({key: 'gameScene'});
     }
 
-    init() {
+    init(data) {
+        console.log(data.role);
         for (let i = 0; i < this.aiFeelings.length; i++) {
             this.aiFeelings[i] = this.aiFeelingStartMin + Math.floor(Math.random() * (this.aiFeelingStartMax - this.aiFeelingStartMin));
         }
