@@ -4,6 +4,11 @@ class GameScene extends Phaser.Scene {
     aiFeelingStartMax = 25;
     aiFeelings = new Array(13);
     texts = new Array(13);
+    burnout = 1;
+    burnoutRect;
+    card0;
+    card2;
+    card3;
     textPositions =
         [
             {x: 900, y: 150},   //Schleswig-Holstein
@@ -25,7 +30,7 @@ class GameScene extends Phaser.Scene {
         super({key: 'gameScene'});
     }
 
-    init() {
+    init(data) {
         for (let i = 0; i < this.aiFeelings.length; i++) {
             this.aiFeelings[i] = this.aiFeelingStartMin + Math.floor(Math.random() * (this.aiFeelingStartMax - this.aiFeelingStartMin));
         }
@@ -39,11 +44,38 @@ class GameScene extends Phaser.Scene {
         const mapSprite = this.add.image(960, 450, 'map');
 
         for (let i = 0; i < this.textPositions.length; i++) {
-           this.texts[i] = this.add.text(this.textPositions[i].x, this.textPositions[i].y, this.aiFeelings[i] + "%");
+            this.texts[i] = this.add.text(this.textPositions[i].x, this.textPositions[i].y, this.aiFeelings[i] + "%");
         }
+
+        this.add.rectangle(1420, 40, 200, 20, 0x4e5052);
+        this.burnoutRect = this.add.rectangle(1420, 40, 200, 20, 0xff6699);
+
+        this.add.text(1220, 30, "Burnout:");
+
+        this.card0 = this.add.graphics();
+        this.card1 = this.add.graphics();
+        this.card2 = this.add.graphics();
+
+
+        this.card0.lineStyle(2, 0xffff00, 1);
+        this.card0.strokeRoundedRect(32, 32, 200, 300, 32);
+
+        this.card1.lineStyle(2, 0xffff00, 1);
+        this.card1.strokeRoundedRect(252, 32, 200, 300, 32);
+
+        this.card2.lineStyle(2, 0xffff00, 1);
+        this.card2.strokeRoundedRect(252, 352, 200, 300, 32);
+
     }
 
     update() {
+        this.DrawMap();
+        for (let i = 0; i < this.aiFeelings.length; i++) {
+            this.aiFeelings[i] = this.aiFeelings[i];
+        }
+
+        if (this.burnout > 1000) this.burnout = 1000;
+        this.burnoutRect.setSize(200 * (this.burnout / 1000), 20);
 
     }
 
@@ -54,8 +86,12 @@ class GameScene extends Phaser.Scene {
 
     DrawMap() {
         for (let i = 0; i < this.texts.length; i++) {
-            this.texts[i].setText(this.aiFeelings[i]);
+            this.texts[i].setText(this.aiFeelings[i] + "%");
         }
+    }
+
+    DrawCard() {
+
     }
 
 }
