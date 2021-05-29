@@ -11,12 +11,15 @@ class GameScene extends Phaser.Scene {
     texts = new Array(13);
     burnoutRect;
 
+    deck;
+
     //Cards
     cards = new Array(3);
     titelText = new Array(3);
     descriptionText = new Array(3);
     eddieText = new Array(3);
     stressText = new Array(3);
+    seperatorText = new Array(3);
 
 
     textPositions =
@@ -41,7 +44,7 @@ class GameScene extends Phaser.Scene {
     }
 
     init(data) {
-        console.log(data.role);
+        this.deck = data.cards;
         for (let i = 0; i < this.aiFeelings.length; i++) {
             this.aiFeelings[i] = this.aiFeelingStartMin + Math.floor(Math.random() * (this.aiFeelingStartMax - this.aiFeelingStartMin));
         }
@@ -63,7 +66,9 @@ class GameScene extends Phaser.Scene {
 
         this.add.text(1220, 30, "Burnout:");
 
-        this.CreateCard(0, 32, 32);
+        this.CreateCard(0, 30, 30);
+        this.CreateCard(1, 300, 30);
+        this.CreateCard(2, 330/2, 360);
 
     }
 
@@ -73,8 +78,9 @@ class GameScene extends Phaser.Scene {
             this.aiFeelings[i] = this.aiFeelings[i];
         }
 
-        if (this.burnout > 1000) this.burnout = 1000;
-        this.burnoutRect.setSize(200 * (this.burnout / 1000), 20);
+        if (this.burnout > 100) this.burnout = 100;
+        if(this.burnout < 0) this.burnout = 0;
+        this.burnoutRect.setSize(200 * (this.burnout / 100), 20);
 
     }
 
@@ -91,27 +97,71 @@ class GameScene extends Phaser.Scene {
 
     CreateCard(index, x, y) {
 
-        var style = {
+        var styleTitle = {
             fontSize: 14,
-            fontFamily: 'Arial',
+            fontFamily: 'monospace',
             align: "left",
-            wordWrap: {width: 150, useAdvancedWrap: true}
+            fontWeight : "bold",
+            wordWrap: {width: 200, useAdvancedWrap: true}
         }
 
-        this.cards[index] = this.add.rectangle(x, y, 200, 300).setOrigin(0, 0);
+        var descriptionStyle = {
+            fontSize: 12,
+            fontFamily: 'monospace',
+            align: "left",
+            fill: "#ffffff",
+            wordWrap: {width: 200, useAdvancedWrap: true}
+        }
+
+        var eddieStyle = {
+            fontSize: 12,
+            fontFamily: 'monospace',
+            align: "left",
+            fill: "#12ffaa",
+            wordWrap: {width: 200, useAdvancedWrap: true}
+        }
+
+        var stressStyle = {
+            fontSize: 12,
+            fontFamily: 'monospace',
+            align: "left",
+            fill: "#ff12aa",
+            wordWrap: {width: 200, useAdvancedWrap: true}
+        }
+
+        if(this.cards[index]) {
+            this.cards[index].destroy();
+            this.titelText[index].destroy();
+            this.descriptionText[index].destroy();
+            this.eddieText[index].destroy();
+            this.stressText[index].destroy();
+            this.seperatorText[index].destroy();
+        }
+
+        this.cards[index] = this.add.rectangle(x, y, 250, 300).setOrigin(0, 0);
         this.cards[index].setInteractive();
         this.cards[index].setStrokeStyle(4, 0xffffff);
-        this.cards[index].on('pointerdown', () => this.clickButton("asdasdasd"));
 
-        this.titelText[index] = this.add.text(x + 25, y + 5, "Titel", style);
-        this.descriptionText[index] = this.add.text(x + 25, this.titelText[index].height + this.titelText[index].y + 5, "Descriptionasdasdasdasdasdassdasddasdasdasdasdasdasdas", style);
-        this.eddieText[index] = this.add.text(x + 25, this.descriptionText[index].height + this.descriptionText[index].y + 5, "Description2",style);
+
+        var deckIndex = Math.floor(Math.random() * this.deck.length);
+
+        this.cards[index].on('pointerdown', () => this.ActivateCard(this.deck[deckIndex]));
+
+        this.titelText[index] = this.add.text(x + 25, y + 5, this.deck[deckIndex].shortDescription, styleTitle);
+        this.seperatorText[index] = this.add.text(x+25,this.titelText[index].height + this.titelText[index].y + 1 , "----------------------------", descriptionStyle);
+        this.descriptionText[index] = this.add.text(x + 25, this.titelText[index].height + this.titelText[index].y + 15, this.deck[deckIndex].longText, descriptionStyle);
+        this.eddieText[index] = this.add.text(x + 25, this.descriptionText[index].height + this.descriptionText[index].y + 15, this.deck[deckIndex].valueTextEddie,eddieStyle);
+        this.stressText[index] = this.add.text(x + 25, this.eddieText[index].height + this.eddieText[index].y + 15, this.deck[deckIndex].valueTextStress,stressStyle);
 
     }
 
-    ActivateCard(stats) {
-        this.burnout += -stats.stress;
-        this.aiFeelings[Math.floor(Math.random() * this.aiFeelings.length)] += -stats.eddie;
+    ActivateCard(card) {
+        this.burnout += card.valueStress;
+        this.aiFeelings[Math.floor(Math.random() * this.aiFeelings.length)] += card.valueEddie;
+
+        this.CreateCard(0, 30, 30);
+        this.CreateCard(1, 300, 30);
+        this.CreateCard(2, 330/2, 360);
     }
 
 }
