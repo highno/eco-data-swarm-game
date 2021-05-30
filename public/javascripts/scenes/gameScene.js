@@ -5,6 +5,7 @@ class GameScene extends Phaser.Scene {
     aiFeelingStartMax = 25;
     burnout = 1;
     aiFeelings = new Array(13);
+    lastChanged = -1;
 
 
     //UI
@@ -100,6 +101,9 @@ class GameScene extends Phaser.Scene {
 
     DrawMap() {
         for (let i = 0; i < this.texts.length; i++) {
+            var myStyle = { color: "#ffffff" };
+            if (i == this.lastChanged) myStyle = { color: "#33ff33" };
+            this.texts[i].setStyle(myStyle);
             this.texts[i].setText(this.aiFeelings[i] + "%");
         }
     }
@@ -166,7 +170,8 @@ class GameScene extends Phaser.Scene {
 
     ActivateCard(card) {
         this.burnout += card.valueStress;
-        this.aiFeelings[Math.floor(Math.random() * this.aiFeelings.length)] += card.valueEddie;
+        this.lastChanged = Math.floor(Math.random() * this.aiFeelings.length); 
+        this.aiFeelings[this.lastChanged] += card.valueEddie;
 
         this.CreateCard(0, 30, 30);
         this.CreateCard(1, 300, 30);
