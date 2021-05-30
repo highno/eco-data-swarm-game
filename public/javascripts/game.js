@@ -95,8 +95,8 @@ var gamedata = {
 // load scenes
 game.scene.add('titleScene', titleScene, false, gamedata);
 game.scene.add("game", gameScene, false, gamedata);
-game.scene.add('gameOverScene'), gameOverScene, false, gamedata);
-game.scene.add('winScene'), winScene, false, gamedata);
+game.scene.add('gameOverScene', gameOverScene, false, gamedata);
+game.scene.add('winScene', winScene, false, gamedata);
 
 // start title
 game.scene.start('titleScene',gamedata);

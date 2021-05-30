@@ -158,8 +158,16 @@ class GameScene extends Phaser.Scene {
 
         this.DrawMap();
 
-        if (this.burnout > 100) this.burnout = 100;
+        //if (this.burnout > 100) this.burnout = 100;
+        if (this.burnout > 100) this.scene.start('gameOverScene',this.gameData);
         if(this.burnout < 0) this.burnout = 0;
+        var sum = 0;
+        for( var i = 0; i < this.aiFeelings.length; i++ ){
+            sum += parseInt( this.aiFeelings[i], 10 ); 
+        }
+        var eddieScore = sum/this.aiFeelings.length;
+        console.log('E.D.D.I.E. Score:' + eddieScore);
+        if(eddieScore > 25)  this.scene.start('winScene',this.gameData); //Für MVP ist E.D.D.I.E. erstmal mit 25 %Average zufrieden.
         this.burnoutRect.setSize(200 * (this.burnout / 100), 20);
     }
 

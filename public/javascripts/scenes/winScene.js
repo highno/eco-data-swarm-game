@@ -37,4 +37,4 @@ class WinScene extends Phaser.Scene {
 */
 }
 
-export default TitleScene;
+export default WinScene;
