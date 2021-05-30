@@ -87,8 +87,29 @@ var gamedata = {
       valueStress: 7,
       valueTextCO2: 'Karte hat mäßige Auswirkung auf CO2 Verbrauch',
       valueCO2: 4
+    },
+    {
+      role: 'Citizen',
+      shortDescription: 'Anschreiben an Deinen Landtagsabgeordneten',
+      longText: 'Du besprichst das Thema Sensorik mit lokalen Politikern. Schlussendlich setzt ihr ein Schreiben an den Landtagsabgeordneten auf mit der Bitte das Thema zu fördern.',
+      valueTextEddie: 'Karte hat geringe Wirkung auf Erhöhung der Sensordichte',
+      valueEddie: 2,
+      valueTextStress: 'Karte hat kaum Wirkung auf deinen Stresslevel',
+      valueStress: 1,
+      valueTextCO2: 'Karte hat gerigne Auswirkung auf CO2 Verbrauch',
+      valueCO2: 0
+    },
+    {
+      role: 'Citizen',
+      shortDescription: 'Kampagne in sozialen Medien',
+      longText: 'Du nutzt deine Kontakte zu lokal bekannten YouTubern und anderen Kreativen und sorgst für die Darstellung des Themas in YouTube Videos sowie Podcasts. Die Gespräche müssen gut vorbereitet werden.',
+      valueTextEddie: 'Karte hat mittlere Wirkung auf Erhöhung der Sensordichte',
+      valueEddie: 4,
+      valueTextStress: 'Karte hat anstrenge Wirkung auf deinen Stresslevel',
+      valueStress: 4,
+      valueTextCO2: 'Karte hat geringe Auswirkung auf CO2 Verbrauch',
+      valueCO2: 2
     }
-
 
   ]
 };
