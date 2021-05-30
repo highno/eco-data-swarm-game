@@ -10,8 +10,10 @@ class GameScene extends Phaser.Scene {
     //UI
     texts = new Array(13);
     burnoutRect;
+    eddieRect;
 
     deck;
+    role;
 
     //Cards
     cards = new Array(3);
@@ -45,6 +47,7 @@ class GameScene extends Phaser.Scene {
 
     init(data) {
         this.deck = data.cards;
+        this.role = data.role;
         for (let i = 0; i < this.aiFeelings.length; i++) {
             this.aiFeelings[i] = this.aiFeelingStartMin + Math.floor(Math.random() * (this.aiFeelingStartMax - this.aiFeelingStartMin));
         }
@@ -52,6 +55,12 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         this.load.image('map', './images/de-map.png');
+        this.load.image('citizen', './images/boy.png');
+        this.load.image('scientist', './images/catgirl.png');
+        this.load.image('journalist', './images/princess.png');
+        this.load.image('politician', './images/horngirl.png');
+        this.load.image('nerd', './images/pinkgirl.png');
+        this.load.image('eddie', './images/greenbot.png');
     }
 
     create() {
@@ -61,10 +70,17 @@ class GameScene extends Phaser.Scene {
             this.texts[i] = this.add.text(this.textPositions[i].x, this.textPositions[i].y, this.aiFeelings[i] + "%");
         }
 
+        var imgPlayer = this.add.sprite(1570,50,this.role);
         this.add.rectangle(1420, 40, 200, 20, 0x4e5052);
         this.burnoutRect = this.add.rectangle(1420, 40, 200, 20, 0xff6699);
-
         this.add.text(1220, 30, "Burnout:");
+        this.add.text(1220, 80, "E.D.D.I.E\nHappyness:");
+        
+        var imgEddie = this.add.sprite(1570,85,'eddie');
+        this.add.rectangle(1420, 95, 200, 20, 0x4e5052);
+        this.eddieRect = this.add.rectangle(1420, 95, 200, 20, 0xff6699);
+        this.burnoutRect.setSize( 0, 20);
+        this.eddieRect.setSize(0, 20)
 
         this.CreateCard(0, 30, 30);
         this.CreateCard(1, 300, 30);
@@ -159,16 +175,18 @@ class GameScene extends Phaser.Scene {
         this.DrawMap();
 
         //if (this.burnout > 100) this.burnout = 100;
-        if (this.burnout > 100) this.scene.start('gameOverScene',this.gameData);
-        if(this.burnout < 0) this.burnout = 0;
+        if (this.burnout > 50) this.scene.start('gameOverScene',this.gameData); // MVP 50%
+        if (this.burnout < 0) this.burnout = 0;
+        // Calculate E.D.D.I.E. Score
         var sum = 0;
         for( var i = 0; i < this.aiFeelings.length; i++ ){
             sum += parseInt( this.aiFeelings[i], 10 ); 
         }
         var eddieScore = sum/this.aiFeelings.length;
         console.log('E.D.D.I.E. Score:' + eddieScore);
-        if(eddieScore > 25)  this.scene.start('winScene',this.gameData); //Für MVP ist E.D.D.I.E. erstmal mit 25 %Average zufrieden.
+        if(eddieScore > 30)  this.scene.start('winScene',this.gameData); //Für MVP ist E.D.D.I.E. erstmal mit 25 %Average zufrieden.
         this.burnoutRect.setSize(200 * (this.burnout / 100), 20);
+        this.eddieRect.setSize(200 * eddieScore/100, 20)
     }
 
 }

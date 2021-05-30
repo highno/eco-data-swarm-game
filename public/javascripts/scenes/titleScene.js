@@ -54,15 +54,15 @@ class TitleScene extends Phaser.Scene {
           var imgNerd = this.add.sprite(1270,300,'nerd');
 
           buttonCitizen.setInteractive({ useHandCursor: true });
-          buttonCitizen.on('pointerdown', () => this.clickButton('Citizen'));
+          buttonCitizen.on('pointerdown', () => this.clickButton('citizen'));
           buttonScientist.setInteractive({ useHandCursor: true });
-          buttonScientist.on('pointerdown', () => this.clickButton('Scientist'));
+          buttonScientist.on('pointerdown', () => this.clickButton('scientist'));
           buttonJournalist.setInteractive({ useHandCursor: true });
-          buttonJournalist.on('pointerdown', () => this.clickButton('Journalist'));
+          buttonJournalist.on('pointerdown', () => this.clickButton('journalist'));
           buttonPolitician.setInteractive({ useHandCursor: true });
-          buttonPolitician.on('pointerdown', () => this.clickButton('Politician'));
+          buttonPolitician.on('pointerdown', () => this.clickButton('politician'));
           buttonNerd.setInteractive({ useHandCursor: true });
-          buttonNerd.on('pointerdown', () => this.clickButton('Nerd'));
+          buttonNerd.on('pointerdown', () => this.clickButton('nerd'));
           buttonHelp.setInteractive({ useHandCursor: true });
           buttonHelp.on('pointerdown', () => this.clickButtonHelp());
           
