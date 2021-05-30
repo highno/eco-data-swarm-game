@@ -73,14 +73,7 @@ class GameScene extends Phaser.Scene {
     }
 
     update() {
-        this.DrawMap();
-        for (let i = 0; i < this.aiFeelings.length; i++) {
-            this.aiFeelings[i] = this.aiFeelings[i];
-        }
 
-        if (this.burnout > 100) this.burnout = 100;
-        if(this.burnout < 0) this.burnout = 0;
-        this.burnoutRect.setSize(200 * (this.burnout / 100), 20);
 
     }
 
@@ -162,6 +155,12 @@ class GameScene extends Phaser.Scene {
         this.CreateCard(0, 30, 30);
         this.CreateCard(1, 300, 30);
         this.CreateCard(2, 330/2, 360);
+
+        this.DrawMap();
+
+        if (this.burnout > 100) this.burnout = 100;
+        if(this.burnout < 0) this.burnout = 0;
+        this.burnoutRect.setSize(200 * (this.burnout / 100), 20);
     }
 
 }
