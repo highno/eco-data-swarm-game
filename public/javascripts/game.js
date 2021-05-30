@@ -1,9 +1,13 @@
 import TitleScene from './scenes/titleScene.js';
 import GameScene from './scenes/gameScene.js';
+import GameOverScene from './scenes/gameOverScene.js';
+import WinScene from './scenes/winScene.js';
 
 // Our game scene
 var gameScene = new GameScene();
 var titleScene = new TitleScene();
+var gameOverScene = new GameOverScene();
+var winScene = new WinScene();
 
 
 //* Game scene */
@@ -91,6 +95,8 @@ var gamedata = {
 // load scenes
 game.scene.add('titleScene', titleScene, false, gamedata);
 game.scene.add("game", gameScene, false, gamedata);
+game.scene.add('gameOverScene'), gameOverScene, false, gamedata);
+game.scene.add('winScene'), winScene, false, gamedata);
 
 // start title
 game.scene.start('titleScene',gamedata);
